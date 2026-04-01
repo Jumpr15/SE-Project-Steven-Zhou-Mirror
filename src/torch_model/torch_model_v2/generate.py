@@ -1,4 +1,4 @@
-from modelConfig import ModelConfig
+from torch_model.torch_model_v2.modelConfig import ModelConfig
 from model import Model
 
 import torch

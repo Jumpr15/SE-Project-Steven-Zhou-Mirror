@@ -4,6 +4,7 @@
 
      const api = getFastAPI(injectAuthToken())
 
+     let title = $state()
      let input = $state()
 
      let message_list = $state([
@@ -44,7 +45,7 @@
 
 <main class="h-full bg-black text-white flex flex-col">
      <header class="border-b border-gray-800 px-6 py-4 flex-shrink-0">
-          <h1 class="text-xl font-semibold">RAG Chat</h1>
+          <h1 class="text-xl font-semibold">{title ? title: "New Chat"}</h1>
      </header>
      <div class="flex-1 overflow-y-auto p-6 space-y-6">
           {#each message_list as message}

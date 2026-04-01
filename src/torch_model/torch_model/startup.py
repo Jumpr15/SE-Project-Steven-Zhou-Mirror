@@ -1,30 +1,29 @@
-from modelConfig import ModelConfig
+from torch_model.torch_model.modelConfig import ModelConfig
 
-from model import Model
-from dataloader import DataLoader
+from torch_model.torch_model.model import Model
+from torch_model.torch_model.dataloader import DataLoader
 
-from tokenizer import train_bpe_tokenizer
-from training import model_pretraining
+from torch_model.torch_model.tokenizer import train_bpe_tokenizer
+from torch_model.torch_model.training import model_pretraining
 
 import torch
 import datasets
 from datasets import load_dataset
-from transformers import PreTrainedTokenizerFast
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # entrypoint
 ## example model config
 model_config = ModelConfig(
-     dataset="roneneldan/TinyStories", # ds, or "ajibawa-2023/Children-Stories-Collection"
-     vocab_size=8000, # vocab size
-     batch_size=192, # batch size,
-     seq_len=256, # seq len
-     head_size=64, # head_size
-     embed_dims=512, # embed dims
-     block_num=6, # block nums
-     lr=1e-3, # lr
-     iterations=1000
+     "roneneldan/TinyStories", # ds, or "ajibawa-2023/Children-Stories-Collection"
+     8000, # vocab size
+     16, # batch size,
+     1024, # seq len
+     64, # head_size
+     512, # embed dims
+     6, # block nums
+     1e-3, # lr
+     10000
 )
 
 if __name__ == "__main__":
@@ -33,20 +32,21 @@ if __name__ == "__main__":
      
      # load and joins HF downloaded dataset
      ds = load_dataset(model_config.dataset)
-     joined_ds = ''.join(ds['train']['text'][:3000])
-
+     joined_ds = ''.join(ds['train']['text'])
+     
+     # length of dataset
+     print(len(joined_ds))
+     
      # trained custom BPE tokenizer on dataset
-     # tokenizer = train_bpe_tokenizer(
-     #      model_config.dataset, 
-     #      model_config.vocab_size
-     # )
-
-     tokenizer = PreTrainedTokenizerFast.from_pretrained("TinyStories_BPE_8K")
+     tokenizer = train_bpe_tokenizer(
+          model_config.dataset, 
+          model_config.vocab_size
+     )
      
      # initialize dataloader
      dataloader = DataLoader(
           tokenizer,
-          joined_ds
+          ds
      )
      
      model = Model(
@@ -68,7 +68,7 @@ if __name__ == "__main__":
           model_config.seq_len
      )
      
-     torch.save(model.state_dict(), "model_state/TinyStories2.pt")
+     torch.save(model.state_dict(), "model_state/TinyStories1.py")
      
 # input = helper.encode("lorem ipsum ")
 # input_toks = torch.unsqueeze(input, dim=0).to(device)

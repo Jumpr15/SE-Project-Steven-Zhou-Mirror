@@ -10,8 +10,6 @@ from database.sql.engine import create_db_and_tables, get_session
 from routes.auth.userSignupRouter import signup_router
 from routes.auth.userLoginRouter import login_router
 
-from routes.rag.documentIngestionRouter import ingestion_router
-from routes.rag.retrievalGenerationRouter import retrieval_router
 from routes.rag.directGenerationRouter import direct_generation_router
 
 from routes.chatlog.retrieveChatLogRouter import retreive_chat_log_router
@@ -24,8 +22,6 @@ allowed_origins = [
 signup_router = signup_router()
 login_router = login_router()
 
-ingestion_router = ingestion_router()
-retrieval_router = retrieval_router()
 direct_generation_router = direct_generation_router()
 
 retreive_chat_log_router = retreive_chat_log_router()
@@ -64,18 +60,6 @@ app.include_router(
 )
 
 # RAG routers
-app.include_router(
-     ingestion_router.router, 
-     prefix="/ingestion",
-     tags=["ingestion"]
-     )
-
-app.include_router(
-     retrieval_router.router,
-     prefix="/retrieval",
-     tags=["retrieval"]
-     )
-
 app.include_router(
      direct_generation_router.router,
      prefix="/generate",
