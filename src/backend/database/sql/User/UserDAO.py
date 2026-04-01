@@ -20,6 +20,9 @@ def get_user(
      user = session.exec(statement).first()
      return user
 
+def get_user_conversations():
+     pass
+
 def insert_user(
      username: str,
      password: str,
@@ -38,7 +41,7 @@ def update_user(
      session
 ):
      statement = select(User).where(User.username == username)
-     user = session.exec(statement).one()
+     user = session.exec(statement).first()
      user.username = new_username
      session.add(user)
      session.commit()
@@ -49,7 +52,7 @@ def delete_user(
      session
 ):
      statement = select(User).where(User.username == username)
-     user = session.exec(statement).one()
+     user = session.exec(statement).first()
      session.delete(user)
      session.commit()
 
