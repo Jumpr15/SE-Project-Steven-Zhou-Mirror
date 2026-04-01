@@ -1,0 +1,29 @@
+{
+  "name": "se-project-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate": "npx orval --config orval.config.cjs"
+  },
+  "devDependencies": {
+    "@skeletonlabs/skeleton": "^4.13.0",
+    "@skeletonlabs/skeleton-svelte": "^4.13.0",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "@tailwindcss/forms": "^0.5.11",
+    "svelte": "^5.53.12",
+    "vite": "^8.0.1"
+  },
+  "dependencies": {
+    "@ai-sdk/svelte": "^4.0.140",
+    "@lucide/svelte": "^1.7.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "axios": "^1.14.0",
+    "orval": "^8.6.2",
+    "svelte-spa-router": "^5.0.0",
+    "tailwindcss": "^4.2.2"
+  }
+}
