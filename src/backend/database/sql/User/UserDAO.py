@@ -1,6 +1,6 @@
 from database.sql.User.UserSchema import User
 
-from sqlmodel import select, update, delete
+from sqlmodel import select
 
 def user_exists(
      username: str,

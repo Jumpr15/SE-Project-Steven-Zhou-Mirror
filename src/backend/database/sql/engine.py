@@ -27,5 +27,4 @@ def ret_session():
           return session
           
 # create session dependency
-
 session_dep = Annotated[Session, Depends(get_session)]
