@@ -18,23 +18,10 @@ export interface HTTPValidationError {
   detail?: ValidationError[];
 }
 
-export interface Question {
-  question_number: number;
-  question_type: string;
-  question_content: string;
-  question_answer_choices?: string[] | null;
-}
-
-export interface QuestionDocument {
-  school_of_paper: string;
-  topic_of_paper: string;
-  year_of_paper: number;
-  grade_of_paper: number;
-  question_list: Question[];
-}
-
 export interface UserQuery {
-  query_text: string;
+  username: string;
+  title: string;
+  content: string;
 }
 
 export interface UserSignupForm {

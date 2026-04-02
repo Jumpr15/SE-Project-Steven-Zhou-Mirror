@@ -2,6 +2,7 @@
      import { push } from 'svelte-spa-router';
      import { getFastAPI } from "./api/gen/fastAPI";
      import { token } from './global_state/Token.svelte';
+     import { global_username } from './global_state/Username.svelte';
 
      const api = getFastAPI()
 
@@ -18,6 +19,7 @@
                     "password": password
                })
                token.value = res.data["access_token"]
+               global_username.value = username
                push('/chat')
 
           } catch (error) {

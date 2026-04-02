@@ -11,7 +11,7 @@ class direct_generation_router:
           self.router.add_api_route(
                "/",
                endpoint=self.directGeneration,
-               methods=["GET", "POST"],
+               methods=["POST"],
                tags=["generation"]
           )
           

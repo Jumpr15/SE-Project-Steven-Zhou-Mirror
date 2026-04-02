@@ -1,43 +1,48 @@
 <script lang="js">
      import { injectAuthToken } from './global_state/Token.svelte';
      import { getFastAPI } from './api/gen/fastAPI';
+     import { global_username } from './global_state/Username.svelte';
 
      const api = getFastAPI(injectAuthToken())
 
-     let title = $state()
-     let input = $state()
+     let title = $state('')
+     let input = $state('')
 
-     let message_list = $state([
-     {
-          "role": "user",
-          "content": "dsflksdjf"
-     },
-     {
-          "role": "assistant",
-          "content": "sadkfljs"
-     }
-     ])
+     let message_list = $state([])
 
      async function onSubmit(event) {
           event.preventDefault()
           message_list.push({
                "role": "user",
-               "content": input
+               "content": input,
           })
+          input = ''
 
           try {
-               const res = await api.directGenerationGeneratePost({ "query_text": input });
-               input = ''
-               let res_data = res.data["content"]
-               if (typeof res_data === "string") {
+               console.log({ 
+                    "username": global_username,
+                    "title": title,
+                    "content": JSON.stringify(message_list)
+               })
+               const res = await api.directGenerationGeneratePost({ 
+                    "username": global_username.value,
+                    "title": title,
+                    "content": JSON.stringify(message_list)
+               });
+               let res_content = res.data["content"]
+               let res_title = res.data["title"]
+               if (typeof res_content === "string") {
                     message_list.push({
                          "role": "assistant",
-                         "content": res_data
+                         "content": res_content
                     })
                }
+               if (typeof res_title === "string") {
+                    title = res_title
+               }
+
           } catch (error) {
                console.error("Failed to get model response")
-          } finally {
           }
      }
 

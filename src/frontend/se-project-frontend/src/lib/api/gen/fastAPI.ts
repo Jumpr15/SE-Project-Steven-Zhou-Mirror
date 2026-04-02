@@ -12,7 +12,6 @@ import type {
 } from 'axios';
 
 import type {
-  QuestionDocument,
   RetrieveChatLogChatlogPostParams,
   UserQuery,
   UserSignupForm
@@ -58,29 +57,6 @@ const userLoginLoginPost = (
   }
 
 /**
- * @summary Documentingestion
- */
-const documentIngestionIngestionPost = (
-    questionDocument: QuestionDocument, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
-    return axiosInstance.post(
-      `http://127.0.0.1:8000/ingestion/`,
-      questionDocument,options
-    );
-  }
-
-/**
- * @summary Retrievalgeneration
- */
-const retrievalGenerationRetrievalGet = (
-    userQuery: UserQuery, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
-    return axiosInstance.get(
-      `http://127.0.0.1:8000/retrieval/`,options
-    );
-  }
-
-/**
  * @summary Directgeneration
  */
 const directGenerationGeneratePost = (
@@ -105,11 +81,9 @@ const retrieveChatLogChatlogPost = (
     );
   }
 
-return {rootGet,userSignupSignupPost,userLoginLoginPost,documentIngestionIngestionPost,retrievalGenerationRetrievalGet,directGenerationGeneratePost,directGenerationGeneratePost,retrieveChatLogChatlogPost}};
+return {rootGet,userSignupSignupPost,userLoginLoginPost,directGenerationGeneratePost,retrieveChatLogChatlogPost}};
 export type RootGetResult = AxiosResponse<unknown>
 export type UserSignupSignupPostResult = AxiosResponse<unknown>
 export type UserLoginLoginPostResult = AxiosResponse<unknown>
-export type DocumentIngestionIngestionPostResult = AxiosResponse<unknown>
-export type RetrievalGenerationRetrievalGetResult = AxiosResponse<unknown>
 export type DirectGenerationGeneratePostResult = AxiosResponse<unknown>
 export type RetrieveChatLogChatlogPostResult = AxiosResponse<unknown>

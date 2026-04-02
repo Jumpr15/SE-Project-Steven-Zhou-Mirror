@@ -15,8 +15,6 @@ def insert_conversation(
           user_id=user.id,
           title=title
      )
-     session.add(user)
+     session.add(conversation)
      session.commit()
-     
-def 
      
